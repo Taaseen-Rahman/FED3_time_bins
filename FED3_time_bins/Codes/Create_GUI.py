@@ -416,7 +416,8 @@ def choose_to_import_settings_file(inputs, default):
     sg.theme("DarkTeal2")
     layout = [
         [sg.T("")], [sg.Text(("Import an existing settings excel file with filenames, "+
-                              "genotypes and treatments.")), 
+                              "genotypes and treatments.\n"
+                              "(Do not delete or leave any metadata header titles blank.)")), 
                      sg.Combo(["True", "False"],default_value=str(default['Use settings file']),
                               key="Settings",enable_events=True)],
         [sg.T("")], [sg.Button("Submit")]
@@ -478,7 +479,10 @@ def create_settings_file(inputs):
     size2 = (20,1)
 
     # Header row with EDITABLE titles (as before)
-    rows = [[sg.T("")],
+    rows = [[sg.Text("Keep all metadata header titles present and unique. "
+                     "Individual metadata values may be left blank.",
+                     text_color="red")],
+            [sg.T("")],
             [sg.Text('Filename', size=size1),
              sg.Input(default_text="Genotype",  key="Name1", size=size2, expand_x=True),
              sg.Input(default_text="Treatment", key="Name2", size=size2, expand_x=True),
