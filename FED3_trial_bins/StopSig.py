@@ -1,4 +1,3 @@
-
 import os
 from datetime import datetime
 import matplotlib.pyplot as plt
@@ -305,7 +304,9 @@ def safe_percent(numerator, denominator):
 # ------------------------------------------------------------
 def collect_metadata(root, file_map, save_folder):
     use_existing = messagebox.askyesno(
-        "Metadata", "Do you have an existing metadata file?"
+        "Metadata",
+        "Do you have an existing metadata file?\n\n"
+        "Do not delete or leave any metadata header titles blank."
     )
 
     if use_existing:
@@ -327,6 +328,13 @@ def collect_metadata(root, file_map, save_folder):
     window = tk.Toplevel(root)
     window.title("Enter StopSig Metadata")
     window.geometry("760x520")
+
+    tk.Label(
+        window,
+        text=("Keep all metadata header titles present and unique. "
+              "Individual metadata values may be left blank."),
+        fg="dark red"
+    ).pack(fill="x", padx=8, pady=(6, 2))
 
     canvas = tk.Canvas(window)
     scrollbar = tk.Scrollbar(window, orient="vertical", command=canvas.yview)
