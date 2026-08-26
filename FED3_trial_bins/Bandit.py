@@ -1724,7 +1724,8 @@ def run_gui():
 
     use_existing = messagebox.askyesno(
         "Metadata",
-        "Do you have an existing metadata file?"
+        "Do you have an existing metadata file?\n\n"
+        "Do not delete or leave any metadata header titles blank."
     )
 
     metadata_df = None
@@ -1752,6 +1753,13 @@ def run_gui():
         meta_window = tk.Toplevel()
         meta_window.title("Enter Metadata")
         meta_window.geometry("700x500")
+
+        tk.Label(
+            meta_window,
+            text=("Keep all metadata header titles present and unique. "
+                  "Individual metadata values may be left blank."),
+            fg="dark red"
+        ).pack(fill="x", padx=8, pady=(6, 2))
 
         canvas = tk.Canvas(meta_window)
         scrollbar = tk.Scrollbar(meta_window, orient="vertical", command=canvas.yview)
